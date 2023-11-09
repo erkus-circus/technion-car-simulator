@@ -72,6 +72,7 @@ window.onload = () => {
                         // perfectly inelastic collisions:
                         objects[j].v = Vector.Add(objects[i].v.multiplyByScalar(objects[i].mass), (objects[j].v.multiplyByScalar(objects[j].mass))).multiplyByScalar(1 / (objects[i].mass + objects[j].mass))
                         objects[j].mass += objects[i].mass
+                        objects[i].mass = 0
                         continue
                     } else {
                         totalAcceleration = Vector.Add(totalAcceleration, gravityVector.negative())
