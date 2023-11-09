@@ -69,14 +69,9 @@ window.onload = () => {
 
                     // Collision Logic: TODO: Help!
                     if (d <= maxD && objects[i].mass <= objects[j].mass) {
-                        // switch direction
-                        // TODO: is this correct? should the direction be accounted for in here?
-                        if (objects[i].v.magnitude > 40 || objects[j].v.magnitude > 40 || d + .1 * Math.sqrt(objects[j].mass / Math.PI) <= maxD) {
-                            objects[j].mass += objects[i].mass
-                            objects[j].v.magnitude = 0
-                            objects[i].mass = 0
-                            continue
-                        }
+                        // perfectly inelastic collisions:
+                        objects[j].v = Vector.Add(objects[i].v.multiplyByScalar(objects[i].mass), (objects[j].v.multiplyByScalar(objects[j].mass))).multiplyByScalar(1 / (objects[i].mass + objects[j].mass))
+                        objects[j].mass += objects[i].mass
                         continue
                     } else {
                         totalAcceleration = Vector.Add(totalAcceleration, gravityVector.negative())
